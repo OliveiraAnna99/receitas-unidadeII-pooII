@@ -9,13 +9,29 @@ final ValueNotifier<List> tableStateNotifier = new ValueNotifier([]);
 void carregar(index){
 
   if (index == 1) carregarCervejas();
-
+  else if(index == 0) carregarCafes();
+  else if (index == 2) carregarNacoes();
 }
 void carregarCervejas() {
   tableStateNotifier.value = [
     {"name": "La Fin Du Monde", "style": "Bock", "ibu": "65"},
     {"name": "Sapporo Premiume", "style": "Sour Ale", "ibu": "54"},
     {"name": "Duvel", "style": "Pilsner", "ibu": "82"}
+  ];
+}
+
+void carregarCafes() {
+  tableStateNotifier.value = [
+    {"name": "Latte", "style": "Expresso", "ibu": "Forte"},
+    {"name": "Frappe", "style": "Americado", "ibu": "Forte"},
+    {"name": "Mocha", "style": "Expresso", "ibu": "Forte"}
+  ];
+}
+void carregarNacoes() {
+  tableStateNotifier.value = [
+    {"name": "Nação X", "style": "América do Sul", "ibu": "100 milhões"},
+    {"name": "Nação Y", "style": "Europa", "ibu": "50 milhões"},
+    {"name": "Nação Z", "style": "Ásia", "ibu": "200 milhões"}
   ];
 }
 }
@@ -75,6 +91,7 @@ class MyApp extends StatelessWidget {
       ));
 
   }
+
 
 
 }
