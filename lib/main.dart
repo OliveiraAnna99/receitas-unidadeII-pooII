@@ -14,7 +14,6 @@ void main() {
 
 }
 
-
 class MyApp extends StatelessWidget {
 
 
@@ -36,7 +35,25 @@ class MyApp extends StatelessWidget {
 
           ),
 
-        body: DataTableWidget(jsonObjects:dataObjects),
+        body: ValueListenableBuilder(
+
+          valueListenable: twitter,
+
+          builder:(_, value, __){
+
+            return DataTableWidget(
+
+              jsonObjects:value, 
+
+              propertyNames: ["name","style","ibu"], 
+
+              columnNames: ["Nome", "Estilo", "IBU"]
+
+            );
+
+          }
+
+        ),
 
         bottomNavigationBar: NewNavBar(),
 
@@ -46,7 +63,6 @@ class MyApp extends StatelessWidget {
 
 
 }
-
 class NewNavBar extends HookWidget {
 
   NewNavBar();
