@@ -89,7 +89,7 @@ class MyApp extends StatelessWidget {
 
         ),
 
-        bottomNavigationBar: NewNavBar(),
+        bottomNavigationBar: NewNavBar(itemSelectedCallback: carregarCervejas),
 
       ));
 
