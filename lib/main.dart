@@ -4,7 +4,41 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 
 final ValueNotifier<List> tableStateNotifier = new ValueNotifier([]);
 
-//var dataObjects = [];
+void carregarCervejas(){
+
+  tableStateNotifier.value = [{
+
+          "name": "La Fin Du Monde",
+
+          "style": "Bock",
+
+          "ibu": "65"
+
+          },
+
+          {
+
+          "name": "Sapporo Premiume",
+
+          "style": "Sour Ale",
+
+          "ibu": "54"
+
+          },
+
+          {
+
+          "name": "Duvel", 
+
+          "style": "Pilsner", 
+
+          "ibu": "82"
+
+          }
+
+        ];
+
+}
 
 void main() {
 
@@ -80,37 +114,7 @@ class NewNavBar extends HookWidget {
 
         state.value = index;
 
-        tableStateNotifier.value = [{
-
-          "name": "La Fin Du Monde",
-
-          "style": "Bock",
-
-          "ibu": "65"
-
-          },
-
-          {
-
-          "name": "Sapporo Premiume",
-
-          "style": "Sour Ale",
-
-          "ibu": "54"
-
-          },
-
-          {
-
-          "name": "Duvel", 
-
-          "style": "Pilsner", 
-
-          "ibu": "82"
-
-          }
-
-        ];
+        carregarCervejas();        
 
       }, 
 
