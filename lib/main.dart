@@ -47,7 +47,6 @@ class MyApp extends StatelessWidget {
 
 }
 
-
 class NewNavBar extends HookWidget {
 
   NewNavBar();
@@ -65,7 +64,7 @@ class NewNavBar extends HookWidget {
 
         state.value = index;
 
-        dataObjects = [{
+        twitter.value = [{
 
           "name": "La Fin Du Monde",
 
@@ -126,8 +125,6 @@ class NewNavBar extends HookWidget {
 
 
 }
-
-
 
 class DataTableWidget extends StatelessWidget {
 
