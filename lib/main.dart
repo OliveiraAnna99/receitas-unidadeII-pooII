@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_hooks/flutter_hooks.dart';
 
-final ValueNotifier<List> twitter = new ValueNotifier([]);
+final ValueNotifier<List> tableStateNotifier = new ValueNotifier([]);
 
 //var dataObjects = [];
 
@@ -37,7 +37,7 @@ class MyApp extends StatelessWidget {
 
         body: ValueListenableBuilder(
 
-          valueListenable: twitter,
+          valueListenable: tableStateNotifier,
 
           builder:(_, value, __){
 
@@ -80,7 +80,7 @@ class NewNavBar extends HookWidget {
 
         state.value = index;
 
-        twitter.value = [{
+        tableStateNotifier.value = [{
 
           "name": "La Fin Du Monde",
 
