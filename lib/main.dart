@@ -99,7 +99,16 @@ class MyApp extends StatelessWidget {
 }
 class NewNavBar extends HookWidget {
 
-  NewNavBar();
+  var itemSelectedCallback; //esse atributo será uma função
+
+
+  NewNavBar({this.itemSelectedCallback}){
+
+    itemSelectedCallback ??= (){} ;
+
+  } 
+
+    
 
 
   @override
@@ -114,7 +123,9 @@ class NewNavBar extends HookWidget {
 
         state.value = index;
 
-        carregarCervejas();        
+        itemSelectedCallback();
+
+        //carregarCervejas();        
 
       }, 
 
