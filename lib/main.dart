@@ -7,65 +7,50 @@ class DataService with ChangeNotifier {
 
   List<Map<String, dynamic>> get tableState => _tableState;
 
-  List<String> getColumnNames() {
-    if (_dataType == "cafes") {
-      return ["Nome", "Estilo", "IBU"];
-    } else if (_dataType == "cervejas") {
-      return ["Nome", "Estilo", "IBU"];
-    } else if (_dataType == "nacoes") {
-      return ["Nome", "Região", "População"];
-    }
-    return [];
-  }
+  static const Map<String, List<String>> columnNamesMap = {
+    "cafes": ["Nome", "Estilo", "IBU"],
+    "cervejas": ["Nome", "Estilo", "IBU"],
+    "nacoes": ["Nome", "Região", "População"],
+  };
 
-  List<String> getPropertyNames() {
-    if (_dataType == "cafes") {
-      return ["name", "style", "ibu"];
-    } else if (_dataType == "cervejas") {
-      return ["name", "style", "ibu"];
-    } else if (_dataType == "nacoes") {
-      return ["name", "style", "population"];
-    }
-    return [];
-  }
+  static const Map<String, List<String>> propertyNamesMap = {
+    "cafes": ["name", "style", "ibu"],
+    "cervejas": ["name", "style", "ibu"],
+    "nacoes": ["name", "style", "population"],
+  };
 
-  void carregar(int index) {
-    final List<Function> actions = [
-      carregarCafes,
-      carregarCervejas,
-      carregarNacoes,
-    ];
-
-    index = index.clamp(0, actions.length - 1);
-    actions[index]();
-    notifyListeners();
-  }
-
-  void carregarCervejas() {
-    _dataType = "cervejas";
-    _tableState = [
-      {"name": "La Fin Du Monde", "style": "Bock", "ibu": "65"},
-      {"name": "Sapporo Premiume", "style": "Sour Ale", "ibu": "54"},
-      {"name": "Duvel", "style": "Pilsner", "ibu": "82"}
-    ];
-  }
-
-  void carregarCafes() {
-    _dataType = "cafes";
-    _tableState = [
+  static const Map<String, List<Map<String, dynamic>>> dataMap = {
+    "cafes": [
       {"name": "Latte", "style": "Expresso", "ibu": "Forte"},
       {"name": "Frappe", "style": "Americado", "ibu": "Forte"},
       {"name": "Mocha", "style": "Expresso", "ibu": "Forte"}
-    ];
-  }
-
-  void carregarNacoes() {
-    _dataType = "nacoes";
-    _tableState = [
+    ],
+    "cervejas": [
+      {"name": "La Fin Du Monde", "style": "Bock", "ibu": "65"},
+      {"name": "Sapporo Premiume", "style": "Sour Ale", "ibu": "54"},
+      {"name": "Duvel", "style": "Pilsner", "ibu": "82"}
+    ],
+    "nacoes": [
       {"name": "Nação X", "style": "América do Sul", "population": "100 milhões"},
       {"name": "Nação Y", "style": "Europa", "population": "50 milhões"},
       {"name": "Nação Z", "style": "Ásia", "population": "200 milhões"}
-    ];
+    ],
+  };
+
+  void carregar(int index) {
+    final List<String> dataTypes = dataMap.keys.toList();
+    index = index.clamp(0, dataTypes.length - 1);
+    _dataType = dataTypes[index];
+    _tableState = dataMap[_dataType]!;
+    notifyListeners();
+  }
+
+  List<String> getColumnNames() {
+    return columnNamesMap[_dataType] ?? [];
+  }
+
+  List<String> getPropertyNames() {
+    return propertyNamesMap[_dataType] ?? [];
   }
 }
 
