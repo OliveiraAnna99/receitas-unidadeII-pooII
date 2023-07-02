@@ -3,8 +3,31 @@ import 'package:provider/provider.dart';
 
 class DataService with ChangeNotifier {
   List<Map<String, dynamic>> _tableState = [];
+  String _dataType = "cafes";
 
   List<Map<String, dynamic>> get tableState => _tableState;
+
+  List<String> getColumnNames() {
+    if (_dataType == "cafes") {
+      return ["Nome", "Estilo", "IBU"];
+    } else if (_dataType == "cervejas") {
+      return ["Nome", "Estilo", "IBU"];
+    } else if (_dataType == "nacoes") {
+      return ["Nome", "Região", "População"];
+    }
+    return [];
+  }
+
+  List<String> getPropertyNames() {
+    if (_dataType == "cafes") {
+      return ["name", "style", "ibu"];
+    } else if (_dataType == "cervejas") {
+      return ["name", "style", "ibu"];
+    } else if (_dataType == "nacoes") {
+      return ["name", "style", "population"];
+    }
+    return [];
+  }
 
   void carregar(int index) {
     final List<Function> actions = [
@@ -19,6 +42,7 @@ class DataService with ChangeNotifier {
   }
 
   void carregarCervejas() {
+    _dataType = "cervejas";
     _tableState = [
       {"name": "La Fin Du Monde", "style": "Bock", "ibu": "65"},
       {"name": "Sapporo Premiume", "style": "Sour Ale", "ibu": "54"},
@@ -27,6 +51,7 @@ class DataService with ChangeNotifier {
   }
 
   void carregarCafes() {
+    _dataType = "cafes";
     _tableState = [
       {"name": "Latte", "style": "Expresso", "ibu": "Forte"},
       {"name": "Frappe", "style": "Americado", "ibu": "Forte"},
@@ -35,10 +60,11 @@ class DataService with ChangeNotifier {
   }
 
   void carregarNacoes() {
+    _dataType = "nacoes";
     _tableState = [
-      {"name": "Nação X", "style": "América do Sul", "ibu": "100 milhões"},
-      {"name": "Nação Y", "style": "Europa", "ibu": "50 milhões"},
-      {"name": "Nação Z", "style": "Ásia", "ibu": "200 milhões"}
+      {"name": "Nação X", "style": "América do Sul", "population": "100 milhões"},
+      {"name": "Nação Y", "style": "Europa", "population": "50 milhões"},
+      {"name": "Nação Z", "style": "Ásia", "population": "200 milhões"}
     ];
   }
 }
@@ -66,8 +92,8 @@ class MyApp extends StatelessWidget {
           builder: (_, value, __) {
             return DataTableWidget(
               jsonObjects: value.tableState,
-              columnNames: ["Nome", "Estilo", "IBU"],
-              propertyNames: ["name", "style", "ibu"],
+              columnNames: value.getColumnNames(),
+              propertyNames: value.getPropertyNames(),
             );
           },
         ),
